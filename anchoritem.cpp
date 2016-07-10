@@ -52,7 +52,9 @@ void AnchorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     QString id = QString::number(m_anchor.getId());
     painter->drawText(QRectF(-10, -10, 20, 20), Qt::AlignCenter, id);
 
-    QString rssi = QString::number(m_anchor.getRssi());
+    QString rssi = "*";
+    if (m_anchor.getRssi() > 0.000001)
+        rssi = QString::number(m_anchor.getRssi());
     qDebug() << "rssi is in item: " << m_anchor.getRssi();
     font.setPixelSize(18);
     painter->setFont(font);

@@ -13,7 +13,7 @@ Anchor::Anchor(int id, double rssi)
 }
 
 Anchor::Anchor(int id, qreal x, qreal y, qreal z)
-    :m_id(id), m_location(Location(x, y, z))
+    :m_id(id), m_location(Location(x, y, z)), m_rssi(0)
 {
 
 }
