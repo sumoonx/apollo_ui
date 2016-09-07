@@ -1,6 +1,8 @@
 #include "clientitem.h"
 
 #include <graphicsmap.h>
+#include <qdebug.h>
+#include <QGraphicsScene>
 
 ClientItem::ClientItem(QGraphicsItem *parent)
     :QGraphicsItem(parent)
@@ -25,12 +27,27 @@ void ClientItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     painter->setPen(QPen(Qt::black, 0));
     painter->setBrush(m_flash ? Qt::red : Qt::yellow);
     painter->drawEllipse(-5, -5, 10, 10);
+
+    QString location = m_location.toString();
+
+    qDebug() << "location of this client: " << location;
+    QFont font("Times");
+    font.setPixelSize(18);
+    painter->setFont(font);
+    painter->drawText(QRectF(10, -5, 100, 20), Qt::AlignCenter, location);
 }
 
 void ClientItem::timerEvent(QTimerEvent *)
 {
     m_flash = !m_flash;
     update();
+}
+
+void ClientItem::setLocation(Location location) {
+    m_location = location;
+    setPoint(m_location.point());
+    QRectF rect(scenePos().x()+10, scenePos().y()-5, 100, 20);
+    scene()->update(rect);
 }
 
 void ClientItem::setPoint(QPointF pos)

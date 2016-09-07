@@ -1,6 +1,7 @@
 #include "location.h"
 
 Location::Location()
+    :m_x(0), m_y(0), m_z(0)
 {
 
 }
@@ -37,3 +38,9 @@ QPointF Location::point()
     return QPointF(m_x, m_y);
 }
 
+QString Location::toString() {
+//    QString ret;
+//    ret << "(x=" << x << ", y=" << y << ", z=" << z << ")";
+    return QString("(%1,%2,%3)").arg(m_x).arg(m_y).arg(m_z);
+//    return QString("(" + x + "," + y + "," + z + ")");
+}

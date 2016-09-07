@@ -2,6 +2,7 @@
 #define LOCATION_H
 
 #include <QPointF>
+#include <QString>
 
 class Location
 {
@@ -14,6 +15,8 @@ public:
     qreal y();
     qreal z();
     QPointF point();
+
+    QString toString();
 
 private:
     qreal m_x;
