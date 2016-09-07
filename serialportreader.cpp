@@ -9,7 +9,7 @@ const QString SerialPortReader::SERIALPORT_NAME = "ttyUSB0";
 SerialPortReader::SerialPortReader(QObject *parent)
     :QObject(parent)
 {
-    RssiWorker *worker = new RssiWorker(this);
+    worker = new RssiWorker();
     worker->moveToThread(&m_workerThread);
     connect(&m_workerThread, SIGNAL(finished()),
             worker, SLOT(deleteLater()));
@@ -20,6 +20,7 @@ SerialPortReader::SerialPortReader(QObject *parent)
 
 SerialPortReader::~SerialPortReader()
 {
+    delete worker;
     m_workerThread.quit();
     m_workerThread.wait();
 }
@@ -47,7 +48,7 @@ bool SerialPortReader::open()
         m_timer.start(TIMEOUT);
     }
     return ret;
-    return false;
+    //return false;
 }
 
 void SerialPortReader::handleReadyRead()

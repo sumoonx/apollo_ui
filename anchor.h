@@ -19,6 +19,7 @@ public:
     Location getLocation();
     QPointF getPoint();
     qreal getHeight();
+
     double getRssi();
 
     bool isEmpty();

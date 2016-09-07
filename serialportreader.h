@@ -7,6 +7,7 @@
 #include <QThread>
 #include <QtSerialPort/QSerialPort>
 #include <anchor.h>
+#include <rssiworker.h>
 
 class SerialPortReader : public QObject
 {
@@ -35,6 +36,8 @@ private:
     QSerialPort *m_serialPort;
     QByteArray  m_readData;
     QTimer      m_timer;
+
+    RssiWorker *worker;
     QThread m_workerThread;
 };
 

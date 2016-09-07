@@ -24,7 +24,10 @@ SOURCES += main.cpp\
     location.cpp \
     serialport.cpp \
     serialportreader.cpp \
-    rssiworker.cpp
+    rssiworker.cpp \
+    positioningworker.cpp \
+    threedimenworker.cpp \
+    movingworker.cpp
 
 HEADERS  += mainwindow.h \
     clientitem.h \
@@ -36,7 +39,10 @@ HEADERS  += mainwindow.h \
     location.h \
     serialport.h \
     serialportreader.h \
-    rssiworker.h
+    rssiworker.h \
+    positioningworker.h \
+    threedimenworker.h \
+    movingworker.h
 
 FORMS    += mainwindow.ui
 

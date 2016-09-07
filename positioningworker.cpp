@@ -1,6 +1,7 @@
-#include "positioningalgorithm.h"
+#include "positioningworker.h"
 
-PositioningAlgorithm::PositioningAlgorithm()
+PositioningWorker::PositioningWorker(QObject *parent)
+    :QObject(parent)
 {
 
 }

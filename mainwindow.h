@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QThread>
 #include <anchor.h>
 #include <client.h>
 #include <anchoritem.h>
@@ -9,6 +10,7 @@
 #include <graphicsmap.h>
 #include <graphicsscene.h>
 #include <serialportreader.h>
+#include <positioningworker.h>
 
 namespace Ui {
 class MainWindow;
@@ -35,6 +37,9 @@ private slots:
 
     void updateClient(Location location);
 
+signals:
+    void locationSolved(Location location);
+
 private:
     void updateAnchorRssi(Anchor anchor);
 
@@ -50,6 +55,9 @@ private:
     GraphicsScene *m_scene;
 
     SerialPortReader *m_serialReader;
+
+    PositioningWorker *worker;
+    QThread m_workerThread;
 };
 
 #endif // MAINWINDOW_H

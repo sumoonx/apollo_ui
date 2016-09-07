@@ -4,6 +4,8 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDebug>
+#include <positioningworker.h>
+#include <threedimenworker.h>
 
 const QString MainWindow::ANCHORS_PATH = "/home/jeremy/workspace/qt/positioning/config/anchors";
 const QChar MainWindow::SPLITER = ',';
@@ -18,12 +20,18 @@ MainWindow::MainWindow(QWidget *parent) :
     m_serialReader = new SerialPortReader(this);
     connect(m_serialReader, SIGNAL(rssiObtained(QList<Anchor>)), this, SLOT(updateAnchorRssies(QList<Anchor>)));
     m_serialReader->open();
+
+    worker = new ThreeDimenWorker();
+    worker->moveToThread(&m_workerThread);
+    connect(m_serialReader, SIGNAL(rssiObtained(QList<Anchor>)), worker, SLOT(doWork(QList<Anchor>)));
+    connect(worker, SIGNAL(resultReady(Location)), this, SLOT(updateClient(Location)));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
     delete m_map;
+    delete worker;
     writeAnchorsToFile();
 }
 
